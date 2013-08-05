@@ -1,5 +1,5 @@
 #contextmenu_box{
-	background-color:white;
+	background: #EEE;
 	box-shadow: #CCC 5px 3px 1px;
 	margin-left:5px;
 }
@@ -20,12 +20,18 @@
 #contextmenu li {
 	list-style-type:none;
 	padding:5px;
-	margin-left: 10px;
 	display:block;
 
 }
 #contextmenu li a {
 	color:black;
+}
+#contextmenu li a:hover {
+   text-decoration:none;
+}
+#contextmenu li img{
+    vertical-align:middle;
+    padding:5px;
 }
 #contextmenu_box #closecontext{
 	display:inline;
@@ -37,3 +43,4 @@
 	background-color :#E2E1E1;
 	cursor: pointer;
 	 }
+
