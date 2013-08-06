@@ -21,7 +21,9 @@ M.LoginAs.init = function(Y,loginas){
 		//Get the url of the user
 		var userURL = e._currentTarget.childNodes[0].href;
 		var queryParams = Y.QueryString.parse(userURL.substring(userURL.indexOf('?')+1));
-		var loginasLink = M.cfg.wwwroot +  loginas + 'id='+queryParams.course+'&user='+queryParams.id + '&sesskey='+M.cfg.sesskey; 
+		var loginasLink = M.cfg.wwwroot +  loginas + 'id='+queryParams.course+'&user='+queryParams.id + '&sesskey='+M.cfg.sesskey;
+		var profileLink = M.cfg.wwwroot + '/user/profile.php?id='+queryParams.id; 
+		Y.one('#profilelink').setAttribute('href',profileLink);
 		var loginNode = Y.one('#loginas').setAttribute('href',loginasLink);
 		var a = Y.WidgetPositionAlign;
 		contextMenu.set("align", {node:e._currentTarget, 
@@ -38,14 +40,15 @@ M.LoginAs.init = function(Y,loginas){
 			}
 		}
 		//Hide if its visible
-		var closeMenu = Y.one('#closecontext');
+		/*var closeMenu = Y.one('#closecontext');
 	closeMenu.on('click',function(){
 		contextMenu.hide();
-		});
+		});*/
 	}
 	var userNodes = Y.all('.userenrolment .subfield_picture');
 	userNodes.on('contextmenu',showMenu);
 	});
 	
 }
+
 
