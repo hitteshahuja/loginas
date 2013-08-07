@@ -9,7 +9,8 @@ $loginas_link = "/course/loginas.php?";
 //Only load the loginas module.js if the current logged in user has the capability
 $course  = $PAGE->course;
 $context = context_course::instance($course->id);
-if(!session_is_loggedinas() && has_capability('moodle/user:loginas',$context)){
+$loginasenabled = get_config('local_loginas','enableloginas');
+if(!session_is_loggedinas() && has_capability('moodle/user:loginas',$context) && ($loginasenabled == 1) ){
 	$module              = array(
             'name' => 'loginas',
             'fullpath' => '/local/loginas/module.js'
