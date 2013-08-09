@@ -1,7 +1,7 @@
 #contextmenu_box{
-	background: #EEE;
-	box-shadow: #CCC 5px 3px 1px;
+	background: #FFF;
 	margin-left:5px;
+	border: 1px solid #999;
 
 }
 #contextmenu_box .yui3-widget-hd{
@@ -14,9 +14,8 @@
 #contextmenu {
 	padding:0;
 	margin:0;
-	padding-bottom: 10px;
-	font-size: 10px;
-	font-weight: bold;
+	font-size: 12px;
+	line-height: 2.3em;
 }
 #contextmenu li {
 	list-style-type:none;

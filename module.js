@@ -1,6 +1,9 @@
 M.LoginAs = M.LoginAs || {} ;
-console.log(M); 
-M.LoginAs.init = function(Y,loginas){
+M.LoginAs.ENROLPAGETYPE = 'page-enrol-users';
+M.LoginAs.PARTICIPANTSPAGETYPE = 'page-course-view-weeks';
+M.LoginAs.init = function(Y,params){
+	var loginas = params[0];
+	var pagetype = params[1];
 	YUI().use('overlay','querystring-parse','anim', function (Y) {
 	//Declarations	
 	var bodyContent = '<div id = "contextmenu_box"><ul id = "contextmenu\" ><li>Login As</li><li>View Profile</li></ul></div>';
@@ -9,17 +12,21 @@ M.LoginAs.init = function(Y,loginas){
 			visible:false,
 			width : "140px",
     		zIndex:2,
-
 		});
 		
-			contextMenu.render('');
-		
-		
+		contextMenu.render('');
 	var showMenu = function(e){
 		e.preventDefault();
 		Y.one('#contextmenu_box').setStyle('display','block');
 		//Get the url of the user
-		var userURL = e._currentTarget.childNodes[0].href;
+		var userURL = '';
+		if(pagetype == M.LoginAs.PARTICIPANTSPAGETYPE )
+		{
+			 userURL = e._currentTarget.parentElement.href;
+		}
+		else{
+			 userURL = e._currentTarget.childNodes[0].href;
+		}
 		var queryParams = Y.QueryString.parse(userURL.substring(userURL.indexOf('?')+1));
 		var loginasLink = M.cfg.wwwroot +  loginas + 'id='+queryParams.course+'&user='+queryParams.id + '&sesskey='+M.cfg.sesskey;
 		var profileLink = M.cfg.wwwroot + '/user/profile.php?id='+queryParams.id; 
@@ -34,7 +41,7 @@ M.LoginAs.init = function(Y,loginas){
 		}
 		else
 		{
-			if(Y.one('body').getAttribute('id') == 'page-enrol-users'){
+			if(Y.one('body').getAttribute('id') == pagetype){
 
 			contextMenu.show();
 			}
@@ -45,8 +52,17 @@ M.LoginAs.init = function(Y,loginas){
 		contextMenu.hide();
 		});*/
 	}
-	var userNodes = Y.all('.userenrolment .subfield_picture');
-	userNodes.on('contextmenu',showMenu);
+	var userNodes = null;
+	if(pagetype == M.LoginAs.ENROLPAGETYPE){
+		userNodes = Y.all('.userenrolment .subfield_picture');	
+	}
+	if(pagetype == M.LoginAs.PARTICIPANTSPAGETYPE ){
+		userNodes = Y.all('#participants .userpicture');
+	}
+	if('null' != userNodes){
+		userNodes.on('contextmenu',showMenu,pagetype);
+	}
+	
 	});
 	
 }

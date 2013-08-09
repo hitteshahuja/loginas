@@ -1,10 +1,7 @@
 <?
 global $PAGE;
+$pagetype =  $PAGE->bodyid;
 $loginas_link = "/course/loginas.php?";
-/*if (!$user->deleted and !$currentuser && !session_is_loggedinas() && has_capability('moodle/user:loginas', $coursecontext) && !is_siteadmin($user->id)) {
-            $url = new moodle_url('/course/loginas.php', array('id'=>$course->id, 'user'=>$user->id, 'sesskey'=>sesskey()));
-            $usersetting->add(get_string('loginas'), $url, self::TYPE_SETTING);
-        }*/
         
 //Only load the loginas module.js if the current logged in user has the capability
 $course  = $PAGE->course;
@@ -16,7 +13,7 @@ if(!session_is_loggedinas() && has_capability('moodle/user:loginas',$context) &&
             'fullpath' => '/local/loginas/module.js'
             
         );
-        $params              = array($loginas_link);
+        $params              = array($loginas_link,$pagetype);
         $PAGE->requires->js_init_call('M.LoginAs.init', array(
             $params
         ), false, $module);
