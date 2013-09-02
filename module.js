@@ -59,7 +59,8 @@ M.LoginAs.init = function(Y,params){
 	if(pagetype == M.LoginAs.PARTICIPANTSPAGETYPE ){
 		userNodes = Y.all('#participants .userpicture');
 	}
-	if('null' != userNodes){
+	console.log(userNodes);
+	if(null != userNodes){
 		userNodes.on('contextmenu',showMenu,pagetype);
 	}
 	
